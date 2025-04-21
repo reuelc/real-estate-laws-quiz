@@ -7,8 +7,10 @@ import { Progress } from "@/components/ui/progress"
 import { questions } from "@/data/questions"
 import { QuizResults } from "@/components/quiz-results"
 import { QuizQuestion } from "@/components/quiz-question"
+import { useTheme } from "@/components/ThemeProvider";
 
 export default function QuizApp() {
+  const { theme, toggleTheme } = useTheme();
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
   const [score, setScore] = useState(0)
   const [userAnswers, setUserAnswers] = useState<string[]>(Array(questions.length).fill(""))
@@ -105,20 +107,30 @@ export default function QuizApp() {
   }
 
   return (
-    <div className="container mx-auto py-8 px-4 max-w-4xl">
-      <Card className="shadow-lg">
-        <CardHeader className="border-b bg-slate-50">
-          <CardTitle className="text-2xl text-center text-slate-800">
+    <div className={`container mx-auto py-8 px-4 max-w-4xl transition-colors duration-500 bg-white dark:bg-gray-900 dark:text-gray-100`}>
+      {/* Theme toggle button */}
+      <div className="flex justify-end mb-4">
+        <button
+          onClick={toggleTheme}
+          className="rounded px-4 py-2 font-semibold border shadow transition-colors duration-300 focus:outline-none focus:ring focus:ring-blue-400 dark:bg-gray-800 dark:text-gray-100 dark:border-gray-700 bg-white text-gray-900 border-gray-300"
+          aria-label="Toggle dark mode"
+        >
+          {theme === "dark" ? "🌙 Dark" : "☀️ Light"}
+        </button>
+      </div>
+      <Card className="shadow-lg transition-colors duration-500 bg-white dark:bg-gray-900 dark:text-gray-100">
+        <CardHeader className="border-b bg-slate-50 dark:bg-gray-800">
+          <CardTitle className="text-2xl text-center text-slate-800 dark:text-gray-100">
             {reviewMode ? "Review Mode - Practice Incorrect Items" : "Real Estate Laws Examination"}
           </CardTitle>
-          <CardDescription className="text-center">
+          <CardDescription className="text-center dark:text-gray-400">
             Test your knowledge of Philippine real estate laws and regulations
           </CardDescription>
         </CardHeader>
 
         <div className="px-6 pt-6">
           <Progress value={progress} className="h-2" />
-          <div className="flex justify-between text-sm text-slate-500 mt-1">
+          <div className="flex justify-between text-sm text-slate-500 mt-1 dark:text-gray-400">
             <span>
               Question {currentQuestionIndex + 1} of {shuffledQuestions.length}
             </span>
@@ -136,7 +148,7 @@ export default function QuizApp() {
           />
         </CardContent>
 
-        <CardFooter className="border-t bg-slate-50 flex justify-between">
+        <CardFooter className="border-t bg-slate-50 flex justify-between dark:bg-gray-800">
           <Button variant="outline" onClick={handlePreviousQuestion} disabled={currentQuestionIndex === 0}>
             ← Previous
           </Button>
