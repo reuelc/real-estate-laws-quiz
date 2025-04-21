@@ -123,7 +123,7 @@ export default function QuizApp() {
           <CardTitle className="text-2xl text-center text-slate-800 dark:text-gray-100">
             {reviewMode ? "Review Mode - Practice Incorrect Items" : "Real Estate Laws Examination"}
           </CardTitle>
-          <CardDescription className="text-center dark:text-gray-400">
+          <CardDescription className="text-center text-gray-700 dark:text-gray-400 dark:bg-white dark:text-gray-900">
             Test your knowledge of Philippine real estate laws and regulations
           </CardDescription>
         </CardHeader>
@@ -148,12 +148,16 @@ export default function QuizApp() {
           />
         </CardContent>
 
-        <CardFooter className="border-t bg-slate-50 flex justify-between dark:bg-gray-800">
-          <Button variant="outline" onClick={handlePreviousQuestion} disabled={currentQuestionIndex === 0}>
+        <CardFooter className="border-t bg-slate-50 flex justify-between dark:bg-gray-800 dark:bg-white dark:text-gray-900">
+          <Button variant="outline" onClick={handlePreviousQuestion} disabled={currentQuestionIndex === 0}
+            className="dark:text-gray-900 dark:bg-white dark:border-gray-300"
+          >
             ← Previous
           </Button>
 
-          <Button variant="outline" onClick={resetQuiz}>
+          <Button variant="outline" onClick={resetQuiz}
+            className="dark:text-gray-900 dark:bg-white dark:border-gray-300"
+          >
             Reset Quiz
           </Button>
         </CardFooter>
